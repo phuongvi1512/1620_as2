@@ -5,35 +5,27 @@ const notes = [
     id: 1 
   }
 ]
-
-/*
-const createNoteArea = document.querySelector('.note-container-main .create-note-area')
-const writeNoteArea = document.querySelector('.write-note-area')
-function createNotearea() {
-  const noteArea = `<textarea name="textarea" rows="5" cols="33"></textarea>`
-  writeNoteArea.insertAdjacentHTML('beforebegin', noteArea)
-}
-
-
-createNoteArea.addEventListener('click', createNoteArea)
-*/
-/* working code
-const createNoteArea = document.querySelector('.create-note-area')
-createNoteArea.addEventListener('click', (evt) => {
-  const noteArea = `<textarea rows="5" cols="30"></textarea>`
-  const writeNoteArea = document.querySelector('.write-note-area')
-  writeNoteArea.insertAdjacentHTML('afterbegin', noteArea)
-})
-*/
+/* create textarea */
 const createNoteArea = document.querySelector('.note-container-main .create-note-area')
 const writeNoteArea = document.querySelector('.write-note-area')
 function addNotearea() {
   const noteArea = `<textarea rows="20" cols="35">${Object.values(notes[0])}</textarea>`
   writeNoteArea.insertAdjacentHTML('afterbegin', noteArea)
+  writeNoteArea.appendChild(saveButton)
+  writeNoteArea.appendChild(deleteButton)
   createNoteArea.remove()
 }
 
 createNoteArea.addEventListener('click', addNotearea)
+
+/* create save and delete button */
+const saveButton = document.createElement('button')
+saveButton.innerHTML = 'Save';
+
+
+const deleteButton = document.createElement('button')
+deleteButton.innerHTML = 'Delete';
+
 
 
 /*
