@@ -5,18 +5,6 @@ const notes = [
     id: 1 
   }
 ]
-/* create textarea */
-const createNoteArea = document.querySelector('.note-container-main .create-note-area')
-const writeNoteArea = document.querySelector('.write-note-area')
-function addNotearea() {
-  const noteArea = `<textarea rows="20" cols="35">${Object.values(notes[0])}</textarea>`
-  writeNoteArea.insertAdjacentHTML('afterbegin', noteArea)
-  writeNoteArea.appendChild(saveButton)
-  writeNoteArea.appendChild(deleteButton)
-  createNoteArea.remove()
-}
-
-createNoteArea.addEventListener('click', addNotearea)
 
 /* create save and delete button */
 const saveButton = document.createElement('button')
@@ -26,6 +14,20 @@ saveButton.innerHTML = 'Save';
 const deleteButton = document.createElement('button')
 deleteButton.innerHTML = 'Delete';
 
+/* create textarea with save and delete button*/
+const createNoteArea = document.querySelector('.note-container-main .create-note-area')
+const writeNoteArea = document.querySelector('.write-note-area')
+function addNotearea() {
+  const noteArea = `<textarea rows="20" cols="35"></textarea>`
+  writeNoteArea.insertAdjacentHTML('afterbegin', noteArea)
+  writeNoteArea.appendChild(saveButton)
+  writeNoteArea.appendChild(deleteButton)
+  createNoteArea.remove()
+}
+
+createNoteArea.addEventListener('click', addNotearea)
+
+/* save function */
 
 
 /*
