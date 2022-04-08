@@ -28,7 +28,7 @@ createNoteArea.addEventListener('click', (evt) => {
 const createNoteArea = document.querySelector('.note-container-main .create-note-area')
 const writeNoteArea = document.querySelector('.write-note-area')
 function addNotearea() {
-  const noteArea = `<textarea rows="20" cols="35"></textarea>`
+  const noteArea = `<textarea rows="20" cols="35">${Object.values(notes[0])}</textarea>`
   writeNoteArea.insertAdjacentHTML('afterbegin', noteArea)
   createNoteArea.remove()
 }
