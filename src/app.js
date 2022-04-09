@@ -18,18 +18,19 @@ deleteButton.id = 'delete-button';
 
 
 /* create textarea with save and delete button*/
-
-const createNoteArea = document.querySelector('.icons')
+const createNoteArea = document.querySelector('.create-note-area')
+const createdIcons = document.querySelector('.create-note-area .icons')
 const writeNoteArea = document.querySelector('.write-note-area')
-const noteArea = `<textarea id="note-text" rows="20" cols="35"></textarea>`
+
 function addNotearea() {
+  const noteArea = `<textarea id="note-text" rows="20" cols="35"></textarea>`
   writeNoteArea.insertAdjacentHTML('beforeend', noteArea)
   writeNoteArea.appendChild(saveButton)
   writeNoteArea.appendChild(deleteButton)
-  createNoteArea.remove()
+  createdIcons.remove()
 }
 
-createNoteArea.addEventListener('click', addNotearea)
+createdIcons.addEventListener('click', addNotearea)
 
 
 
@@ -55,8 +56,20 @@ function save() {
   console.log(stringLine)
   notes.push(newNote)
   console.log(notes)
+  saveButton.remove()
+  deleteButton.remove()
+  let node = document.getElementById("note-text");
+  if (node.parentNode) {
+    node.parentNode.removeChild(node)
+  }
+  createNoteArea.appendChild(createdIcons)
 }
-
+/* sample code for remove textarea after click save
+let node = document.getElementById("nested");
+if (node.parentNode) {
+  node.parentNode.removeChild(node);
+}
+*/
 saveButton.addEventListener('click', save)
 /*
 
