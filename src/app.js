@@ -23,15 +23,22 @@ const createNoteArea = document.querySelector('.icons')
 const writeNoteArea = document.querySelector('.write-note-area')
 const noteArea = `<textarea id="note-text" rows="20" cols="35"></textarea>`
 function addNotearea() {
+  writeNoteArea.insertAdjacentHTML('beforeend', noteArea)
   writeNoteArea.appendChild(saveButton)
   writeNoteArea.appendChild(deleteButton)
-  writeNoteArea.insertAdjacentHTML('afterbegin', noteArea)
   createNoteArea.remove()
 }
 
 createNoteArea.addEventListener('click', addNotearea)
 
 
+
+/* delete function */
+function deleteNote() {
+  document.getElementById("note-text").value = '';
+}
+
+deleteButton.addEventListener('click', deleteNote)
 
 /* save function */
 
