@@ -49,9 +49,6 @@ cancelButton.addEventListener('click', cancelNote)
 
 /* save function */
 
-const readNoteArea = document.querySelector(".read-note-area")
-
-
 function saveNote() {
   const writtenNote = document.getElementById("note-text").value;
   const line = writtenNote.split('\n');
@@ -67,7 +64,7 @@ function saveNote() {
   const title = Object.values(notes[notes.length -1]['title']);
   const ulTargetNav = document.getElementById('note-title')
   const noteTitle = document.createElement('li')
-  noteTitle.id = `${title.join('')}`
+  noteTitle.id = `${notes[notes.length -1]['id']}`
   noteTitle.innerHTML = `${title.join('')}`
   ulTargetNav.appendChild(noteTitle)
   cancelNote()
@@ -100,4 +97,46 @@ function saveNote() {
   ulTargetNav.insertAdjacentHTML('afterbegin', `<li> ${title.join('')} </li>`); #adding title into li inside ul using insert..html
   cancelNote() #removing textarea box, buttons, return to original state
 }
+*/
+ulreadNote.addEventListener('click', (evt) => {
+  const targetNote = evt.target.innerHTML;
+  for (const note of notes) {
+    if (note['title'] == targetNote) {
+      const displayNote = `<div>${note['noteBody']}</div>`;
+      readNoteArea.insertAdjacentHTML('afterbegin', displayNote)
+      readNoteArea.insertAdjacentHTML('beforeend', `<button id="close">close</button`)
+    }
+  }
+});
+/* display function */
+const readNoteArea = document.querySelector(".read-note-area")
+
+/*
+
+/* draft code for display function
+click into the li
+after clicking
+target the id from the li
+check with notes to find which note has same note id from li and target note body
+make an object to put note body in (maybe a div)
+using insertadjacenthtml to put it in read note area*/
+/* sample code for copy and paste
+const originalContainer = document.querySelector('.original-container');
+
+originalContainer.addEventListener('click', (evt) => {
+    const copiedTextDiv = `<div>${evt.target.outerHTML}</div> `;
+    const copyContainer = document.querySelector('.copy-container');
+    copyContainer.insertAdjacentHTML('afterbegin',copiedTextDiv);
+});
+
+
+const clearButton = document.querySelector('button')
+
+function clearCopiedDiv() {
+    const allCopies = document.querySelectorAll('.copy-container div')
+    for (const copy of allCopies) {
+        copy.remove()
+    }
+}
+clearButton.addEventListener('click', clearCopiedDiv)
 */
