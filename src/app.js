@@ -99,12 +99,11 @@ function saveNote() {
 }
 */
 ulreadNote.addEventListener('click', (evt) => {
-  const targetNote = evt.target.innerHTML;
+  const targetNote = evt.target.id;
   for (const note of notes) {
-    if (note['title'] == targetNote) {
+    if (note['id'] == targetNote) {
       const displayNote = `<div>${note['noteBody']}</div>`;
       readNoteArea.insertAdjacentHTML('afterbegin', displayNote)
-      readNoteArea.insertAdjacentHTML('beforeend', `<button id="close">close</button`)
     }
   }
 });
