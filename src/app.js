@@ -51,6 +51,7 @@ cancelButton.addEventListener('click', cancelNote)
 
 const readNoteArea = document.querySelector(".read-note-area")
 
+
 function saveNote() {
   const writtenNote = document.getElementById("note-text").value;
   const line = writtenNote.split('\n');
@@ -63,18 +64,40 @@ function saveNote() {
   console.log(stringLine)
   notes.push(newNote)
   console.log(notes)
-  saveButton.remove()
-  cancelButton.remove()
-  let node = document.getElementById("note-text");
-  if (node.parentNode) {
-    node.parentNode.removeChild(node)
-  }
-  createNoteArea.appendChild(createdIcons)
+  const title = Object.values(notes[notes.length -1]['title']);
+  const ulTargetNav = document.getElementById('note-title')
+  const noteTitle = document.createElement('li')
+  noteTitle.id = `${title.join('')}`
+  noteTitle.innerHTML = `${title.join('')}`
+  ulTargetNav.appendChild(noteTitle)
+  cancelNote()
 }
-/* sample code for remove textarea after click save
-let node = document.getElementById("nested");
-if (node.parentNode) {
-  node.parentNode.removeChild(node);
+
+
+saveButton.addEventListener('click', saveNote)
+
+/* create new ul for note title in side nav */
+const noteContainer = document.querySelector('.side-nav nav')
+const ulreadNote = document.createElement('ul')
+ulreadNote.id = 'note-title'
+noteContainer.appendChild(ulreadNote)
+
+/* code dividing
+function saveNote() {
+  const writtenNote = document.getElementById("note-text").value; #getting text from textarea
+  const line = writtenNote.split('\n');
+  const newNote = {}  #create object to put note in: note includes: note title, note body and id
+  newNote['title']= line[0] 
+  line.shift()
+  let stringLine = line.join('\r\n');
+  newNote['noteBody'] = stringLine
+  newNote['id'] = notes.length + 1
+  console.log(stringLine)
+  notes.push(newNote) #adding new note to const notes
+  console.log(notes)
+  const ulTargetNav = document.getElementById('note-title')  #target note-title (ul for note title in side nav)
+  const title = Object.values(notes[notes.length -1]['title']); #get title from notes array
+  ulTargetNav.insertAdjacentHTML('afterbegin', `<li> ${title.join('')} </li>`); #adding title into li inside ul using insert..html
+  cancelNote() #removing textarea box, buttons, return to original state
 }
 */
-saveButton.addEventListener('click', saveNote)
