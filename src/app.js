@@ -28,7 +28,7 @@ createdIcons.addEventListener('click', addNotearea)
 
 
 
-/* delete function */
+/* cancelNote function to delete buttons and textarea in write note area, return the original states */
 
 function cancelNote() {
   saveButton.remove()
@@ -42,11 +42,8 @@ function cancelNote() {
 
 cancelButton.addEventListener('click', cancelNote)
 
-/* create new ul for note title in side nav */
-const noteContainer = document.querySelector('.side-nav nav')
-const ulreadNote = document.createElement('ul')
-ulreadNote.id = 'note-title'
-noteContainer.appendChild(ulreadNote)
+/* target ul in side nav bar*/
+const ulTargetNav = document.querySelector(".notes-list")
 
 /* save function and add note title to side nav */
 
@@ -62,9 +59,9 @@ function saveNote() {
   notes.push(newNote)
 }
 
+
 function addNoteTitle() {
   const title = Object.values(notes[notes.length -1]['title']);
-  const ulTargetNav = document.getElementById('note-title')
   const noteTitle = document.createElement('li')
   noteTitle.id = `${notes[notes.length -1]['id']}`
   noteTitle.innerHTML = `${title.join('')}`
@@ -83,9 +80,9 @@ const closeButton = document.createElement('button')
 closeButton.innerHTML = 'close note'
 closeButton.id = 'close-button';
 
-/* display function and add close button when displaying note */
+/* display function and add close button when displaying */
 const readNoteArea = document.querySelector(".read-note-area")
-ulreadNote.addEventListener('click', (evt) => {
+ulTargetNav.addEventListener('click', (evt) => {
   const targetNote = evt.target.id;
   for (const note of notes) {
     if (note['id'] == targetNote) {
