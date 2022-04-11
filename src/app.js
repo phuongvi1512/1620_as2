@@ -1,10 +1,4 @@
-const notes = [
-  { 
-    title: "first note", 
-    noteBody: "this is an example note",
-    id: 1 
-  }
-]
+const notes = []
 
 /* create save and delete button */
 const saveButton = document.createElement('button')
@@ -35,6 +29,7 @@ createdIcons.addEventListener('click', addNotearea)
 
 
 /* delete function */
+
 function cancelNote() {
   saveButton.remove()
   cancelButton.remove()
@@ -47,7 +42,13 @@ function cancelNote() {
 
 cancelButton.addEventListener('click', cancelNote)
 
-/* save function */
+/* create new ul for note title in side nav */
+const noteContainer = document.querySelector('.side-nav nav')
+const ulreadNote = document.createElement('ul')
+ulreadNote.id = 'note-title'
+noteContainer.appendChild(ulreadNote)
+
+/* save function and add note title to side nav */
 
 function saveNote() {
   const writtenNote = document.getElementById("note-text").value;
@@ -55,87 +56,61 @@ function saveNote() {
   const newNote = {}
   newNote['title']= line[0]
   line.shift()
-  let stringLine = line.join('\r\n');
+  let stringLine = line.join('<br>');
   newNote['noteBody'] = stringLine
   newNote['id'] = notes.length + 1
-  console.log(stringLine)
   notes.push(newNote)
-  console.log(notes)
+}
+
+function addNoteTitle() {
   const title = Object.values(notes[notes.length -1]['title']);
   const ulTargetNav = document.getElementById('note-title')
   const noteTitle = document.createElement('li')
   noteTitle.id = `${notes[notes.length -1]['id']}`
   noteTitle.innerHTML = `${title.join('')}`
   ulTargetNav.appendChild(noteTitle)
+}
+
+saveButton.addEventListener('click', () => {
+  saveNote();
+  addNoteTitle();
   cancelNote()
-}
+})
 
+/* create close button to close read note area*/
 
-saveButton.addEventListener('click', saveNote)
+const closeButton = document.createElement('button')
+closeButton.innerHTML = 'close note'
+closeButton.id = 'close-button';
 
-/* create new ul for note title in side nav */
-const noteContainer = document.querySelector('.side-nav nav')
-const ulreadNote = document.createElement('ul')
-ulreadNote.id = 'note-title'
-noteContainer.appendChild(ulreadNote)
-
-/* code dividing
-function saveNote() {
-  const writtenNote = document.getElementById("note-text").value; #getting text from textarea
-  const line = writtenNote.split('\n');
-  const newNote = {}  #create object to put note in: note includes: note title, note body and id
-  newNote['title']= line[0] 
-  line.shift()
-  let stringLine = line.join('\r\n');
-  newNote['noteBody'] = stringLine
-  newNote['id'] = notes.length + 1
-  console.log(stringLine)
-  notes.push(newNote) #adding new note to const notes
-  console.log(notes)
-  const ulTargetNav = document.getElementById('note-title')  #target note-title (ul for note title in side nav)
-  const title = Object.values(notes[notes.length -1]['title']); #get title from notes array
-  ulTargetNav.insertAdjacentHTML('afterbegin', `<li> ${title.join('')} </li>`); #adding title into li inside ul using insert..html
-  cancelNote() #removing textarea box, buttons, return to original state
-}
-*/
+/* display function and add close button when displaying note */
+const readNoteArea = document.querySelector(".read-note-area")
 ulreadNote.addEventListener('click', (evt) => {
   const targetNote = evt.target.id;
   for (const note of notes) {
     if (note['id'] == targetNote) {
-      const displayNote = `<div>${note['noteBody']}</div>`;
+      const titleNote = `<h1>${note['title']}</h1>`
+      const displayNote = `<p>${note['noteBody']}</p>`;
       readNoteArea.insertAdjacentHTML('afterbegin', displayNote)
+      readNoteArea.insertAdjacentHTML('afterbegin', titleNote)
+      createdIcons.remove()
+    }
+    if (writeNoteArea.firstElementChild != null) {
+      cancelNote()
+      createdIcons.remove()
+    }
+    if (readNoteArea.firstElementChild != null && readNoteArea.contains(closeButton) == false) {
+      readNoteArea.appendChild(closeButton)
     }
   }
 });
-/* display function */
-const readNoteArea = document.querySelector(".read-note-area")
 
-/*
+/* click to close note in note read area */
 
-/* draft code for display function
-click into the li
-after clicking
-target the id from the li
-check with notes to find which note has same note id from li and target note body
-make an object to put note body in (maybe a div)
-using insertadjacenthtml to put it in read note area*/
-/* sample code for copy and paste
-const originalContainer = document.querySelector('.original-container');
+closeButton.addEventListener('click', () => {
+  while (readNoteArea.firstChild) {
+    readNoteArea.removeChild(readNoteArea.firstChild)
+  }
+  createNoteArea.appendChild(createdIcons)
+})
 
-originalContainer.addEventListener('click', (evt) => {
-    const copiedTextDiv = `<div>${evt.target.outerHTML}</div> `;
-    const copyContainer = document.querySelector('.copy-container');
-    copyContainer.insertAdjacentHTML('afterbegin',copiedTextDiv);
-});
-
-
-const clearButton = document.querySelector('button')
-
-function clearCopiedDiv() {
-    const allCopies = document.querySelectorAll('.copy-container div')
-    for (const copy of allCopies) {
-        copy.remove()
-    }
-}
-clearButton.addEventListener('click', clearCopiedDiv)
-*/
