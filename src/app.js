@@ -111,3 +111,10 @@ closeButton.addEventListener('click', () => {
   createNoteArea.appendChild(createdIcons)
 })
 
+/* dark theme */
+
+const checkbox = document.querySelector('.theme-toggle input')
+checkbox.addEventListener('change', function() {
+  document.querySelector('.main-container').classList.toggle('dark-theme');
+  document.querySelector('.main-container').classList.toggle('light-theme');
+})
