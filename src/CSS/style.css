@@ -117,6 +117,7 @@ i {
   color: var(--text);
 }
 
+
 textarea {
   caret-color: var(--not-red);
   border: none;
