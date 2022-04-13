@@ -49,10 +49,17 @@
   margin-top: var(--hdr-hght);
 }
 
-.side-nav span {
+li, .side-nav span, label {
   color: var(--text);
 }
 
+h1 {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--text);
+  font-size: 3em;
+  font-weight: 600;
+  text-decoration: underline;
+}
 .side-nav span p {
   font-size: var(--lrg-txt);
 }
@@ -89,6 +96,26 @@ header a {
   font-size: 1.5rem;
 }
 
+button {
+  font-family: 'Quicksand', sans-serif;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 5px;
+  border-radius: 180px;
+  font-size: 2em;
+  padding: 5px 30px;
+  color: var(--bg-color);
+  background-color: var(--text);
+  border: solid 2px var(--text);
+  transition-duration: 0.4s;
+}
+
+button:hover {
+  background-color: var(--bg-color);
+  color: var(--text);
+  border: solid 2px var(--text);
+}
+
 .note-container-main {
   display: flex;
   flex-grow: 1;
@@ -107,6 +134,8 @@ article {
   font-family: 'Libre Baskerville', serif;
   color: var(--text);
   font-size: 1.6rem;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 i {
@@ -119,6 +148,7 @@ i {
 
 
 textarea {
+  font-size: 1.6em;
   caret-color: var(--not-red);
   border: none;
   border-bottom: 2px solid var(--text);

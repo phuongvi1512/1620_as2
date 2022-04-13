@@ -15,6 +15,15 @@ cancelButton.id = 'cancel-button';
 const createNoteArea = document.querySelector('.create-note-area')
 const createdIcons = document.querySelector('.create-note-area .icons')
 const writeNoteArea = document.querySelector('.write-note-area')
+/* div to put button 
+function addNotearea() {
+  const divButtonContainer = `<div>${saveButton.outerHTML} ${cancelButton.outerHTML}</div>`
+  const noteArea = `<textarea id="note-text" rows="20" cols="50"></textarea>`
+  writeNoteArea.insertAdjacentHTML('beforeend', noteArea)
+  writeNoteArea.insertAdjacentHTML('beforeend',divButtonContainer)
+  createdIcons.remove()
+}
+*/
 
 function addNotearea() {
   const noteArea = `<textarea id="note-text" rows="20" cols="35"></textarea>`
@@ -83,6 +92,11 @@ closeButton.id = 'close-button';
 /* display function and add close button when displaying */
 const readNoteArea = document.querySelector(".read-note-area")
 ulTargetNav.addEventListener('click', (evt) => {
+  if (readNoteArea.firstElementChild != null) {
+    while (readNoteArea.firstChild) {
+      readNoteArea.removeChild(readNoteArea.firstChild)
+    }
+  }
   const targetNote = evt.target.id;
   for (const note of notes) {
     if (note['id'] == targetNote) {
@@ -96,10 +110,12 @@ ulTargetNav.addEventListener('click', (evt) => {
       cancelNote()
       createdIcons.remove()
     }
-    if (readNoteArea.firstElementChild != null && readNoteArea.contains(closeButton) == false) {
+
+    
+    }
+    if (readNoteArea.contains(closeButton) == false) {
       readNoteArea.appendChild(closeButton)
     }
-  }
 });
 
 /* click to close note in note read area */
