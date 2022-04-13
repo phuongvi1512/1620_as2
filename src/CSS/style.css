@@ -192,7 +192,7 @@ footer p {
     left: -65px;
     background: var(--drk-white);
   }
-  
+/*
 .theme-toggle  input[type="checkbox"] + label::after{
     content: ' ';
     display: block;
@@ -206,8 +206,24 @@ footer p {
     background: var(--not-black);
     transition: all 0.3s ease-in;
   }
-  
+*/
+.theme-toggle  input[type="checkbox"] + label::after{
+  content: ' ';
+  display: block;
+  height: 30px;
+  width: 30px;
+  border: 1px solid var(--not-black);  
+  border-radius: 50%;
+  position: absolute;
+  top: -6px;
+  left: -75px;
+  background: var(--not-black);
+  transition: all 0.3s ease-in;
+}
+
 .theme-toggle  input[type="checkbox"]:checked + label::after{
     left: -40px; 
+    background: var(--drk-white);
+    border: 1px solid var(--drk-white); 
     transition: all 0.3s ease-in;
   }
